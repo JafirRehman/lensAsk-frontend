@@ -1,0 +1,14 @@
+{
+    "home": "/",
+    "products": "/products",
+    "productDetails": "/productsdetails/:productid",
+    "success": "/success",
+    "cancel": "/cancel",
+    "login": "/login",
+    "signup": "/signup",
+    "userProfile": "/user/profile",
+    "cart": "/customer/cart",
+    "allOrders": "/user/allorders",
+    "createProduct": "/user/createproduct",
+    "notFound": "*"
+}

@@ -18,7 +18,7 @@ import Header from "./Components/Constants/Header.jsx";
 import Footer from "./Components/Constants/Footer.jsx";
 import ScrollToTop from "./Components/Constants/ScrollToTop.jsx";
 import Newsletter from "./Components/Constants/Newsletter.jsx";
-import Error from "./Components/Constants/Error.jsx";
+import Error from "./Pages/Error.jsx";
 
 const App = () => {
   return (
