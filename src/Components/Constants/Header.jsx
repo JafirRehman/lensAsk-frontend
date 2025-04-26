@@ -19,32 +19,33 @@ const Header = () => {
   useOnClickOutside([menuRef, crossRef], () => setShowMenu(false));
 
   async function logoutfunc() {
-    if (!navigator.onLine) {
-      toast.error("Oops, You are Offline!");
-      return;
-    }
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/logout`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      if (!data.success) {
-        throw new Error(data.message);
-      }
-      dispatch(userlogoutReducer());
-      toast.success(data.message);
-      navigate("/login");
-    } catch (error) {
-      console.log(error.message);
-      toast.error(error.message);
-    }
+    localStorage.clear();
+    // if (!navigator.onLine) {
+    //   toast.error("Oops, You are Offline!");
+    //   return;
+    // }
+    // try {
+    //   const response = await fetch(
+    //     `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/logout`,
+    //     {
+    //       method: "POST",
+    //       credentials: "include",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   const data = await response.json();
+    //   if (!data.success) {
+    //     throw new Error(data.message);
+    //   }
+    //   dispatch(userlogoutReducer());
+    //   toast.success(data.message);
+    //   navigate("/login");
+    // } catch (error) {
+    //   console.log(error.message);
+    //   toast.error(error.message);
+    // }
   }
 
   const location = useLocation();
@@ -60,9 +61,8 @@ const Header = () => {
     <header className="main-header sticky-header">
       <div className="header-content gap-2">
         <div
-          className={`${
-            !showMenu ? "hidden" : ""
-          } h-screen z-20 fixed left-0 top-0 w-full bg-black/35 backdrop-blur-md`}
+          className={`${!showMenu ? "hidden" : ""
+            } h-screen z-20 fixed left-0 top-0 w-full bg-black/35 backdrop-blur-md`}
         >
           <div
             ref={menuRef} // Attach ref to the menu div
@@ -70,68 +70,63 @@ const Header = () => {
           >
             <Link
               to="/"
-              className={`${
-                matchRoutes("/") && "text-ourred-500"
-              } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
+              className={`${matchRoutes("/") && "text-ourred-500"
+                } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
             >
               Home
             </Link>
             <Link
               to="/products"
-              className={`${
-                matchRoutes("/products") && " text-ourred-500"
-              } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
+              className={`${matchRoutes("/products") && " text-ourred-500"
+                } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
             >
               All Products
             </Link>
-            {userState.user && userState.user.role === "Admin" && (
+            {localStorage.getItem('token') && userState?.user?.role === "Admin" && (
               <>
                 <Link
                   to="/user/allorders"
-                  className={`${
-                    matchRoutes("/user/allorders") && " text-ourred-500"
-                  } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
+                  className={`${matchRoutes("/user/allorders") && " text-ourred-500"
+                    } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
                 >
                   All Orders
                 </Link>
                 <Link
                   to="/user/createproduct"
-                  className={`${
-                    matchRoutes("/user/createproduct") && "text-ourred-500"
-                  } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
+                  className={`${matchRoutes("/user/createproduct") && "text-ourred-500"
+                    } flex items-center text-xl justify-center p-2 mb-6 rounded-lg border`}
                 >
                   Create Product
                 </Link>
               </>
             )}
-            {userState.user && (
-              <Link
-                className={`flex items-center text-xl justify-center p-2 mt-7 rounded-lg border`}
-                onClick={logoutfunc}
-              >
-                Logout
-              </Link>
-            )}
-            {!userState.user && (
-              <ul className="flex mt-10 gap-2 justify-end">
+            {
+              localStorage.getItem('token') ? (
                 <Link
-                  to="/login"
-                  className={`${
-                    matchRoutes("/login") && "rounded-lg border text-ourred-500"
-                  } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
+                  className={`flex items-center text-xl justify-center p-2 mt-7 rounded-lg border`}
+                  onClick={logoutfunc}
                 >
-                  Login
+                  Logout
                 </Link>
-                <Link
-                  to="/signup"
-                  className={`${
-                    matchRoutes("/signup") && " text-ourred-500"
-                  } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
-                >
-                  SignUp
-                </Link>
-              </ul>
-            )}
+              ) : (
+                <ul className="flex mt-10 gap-2 justify-end">
+                  <Link
+                    to="/login"
+                    className={`${matchRoutes("/login") && "rounded-lg border text-ourred-500"
+                      } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className={`${matchRoutes("/signup") && " text-ourred-500"
+                      } flex-1 text-center text-xl p-2 mb-2 rounded-lg border`}
+                  >
+                    SignUp
+                  </Link>
+                </ul>
+              )
+            }
           </div>
         </div>
         <div className="h-full items-center flex" onClick={() => navigate("/")}>
@@ -140,7 +135,7 @@ const Header = () => {
             className="w-[130px] m-0 mobile:w-[180px]"
           />
         </div>
-        {userState.user && (
+        {localStorage.getItem('token') && (
           <div className="justify-end gap-4 flex items-center flex-1 h-full">
             {userState.user.role !== "Admin" && (
               <Link
