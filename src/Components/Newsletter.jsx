@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../../styles/Newsletter.scss";
+import "@/styles/Newsletter.scss";
 import Spinner from "./Spinner.jsx";
 import toast from "react-hot-toast";
 

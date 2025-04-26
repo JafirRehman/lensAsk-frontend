@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Spinner from "../../Components/Constants/Spinner";
-import Product from "../../Components/Home/Product";
+import Spinner from "../../Components/Spinner";
+import Product from "../../Components/Products/Product";
 import { useState } from "react";
 import toast from "react-hot-toast";
 const Products = () => {

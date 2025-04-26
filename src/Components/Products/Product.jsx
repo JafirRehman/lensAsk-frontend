@@ -7,7 +7,7 @@ import { FiEye } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import { useState } from "react";
 import { updateuser } from "../../redux/slices/user";
-import Spinner from "../Constants/Spinner";
+import Spinner from "../Spinner";
 import toast from "react-hot-toast";
 
 const Product = ({ post }) => {

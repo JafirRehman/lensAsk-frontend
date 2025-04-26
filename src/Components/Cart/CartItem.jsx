@@ -2,7 +2,7 @@
 import { MdDeleteSweep } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import Spinner from "../Constants/Spinner";
+import Spinner from "../Spinner";
 import { useState } from "react";
 import { updateuser } from "../../redux/slices/user";
 

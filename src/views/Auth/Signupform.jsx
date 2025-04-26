@@ -1,58 +1,19 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Spinner from "../../Components/Constants/Spinner";
-import toast from "react-hot-toast";
-import { updateuser } from "../../redux/slices/user";
+import Spinner from "@/Components/Spinner";
 
-const Loginform = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const Signupform = () => {
+  const [isloading, setIsloading] = useState(false);
   const [passwordtype, setPasswordtype] = useState("password");
   const [formdata, setFormdata] = useState({
+    name: "",
     email: "",
     password: "",
   });
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  async function formhandler(e) {
-    e.preventDefault();
-    setIsLoading(true);
-    if (!navigator.onLine) {
-      toast.error("Oops, You are Offline!");
-      setIsLoading(false);
-      return;
-    }
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/login`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formdata),
-        }
-      );
-      const data = await response.json();
-      if (!data.success) {
-        throw new Error(data.message);
-      }
-      dispatch(updateuser(data.existeduser));
-      toast.success(data.message);
-      navigate("/products");
-    } catch (error) {
-      console.error(error.message);
-      toast.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   function changepasswordtype() {
     passwordtype === "password"
       ? setPasswordtype("text")
@@ -61,22 +22,68 @@ const Loginform = () => {
   function changeformvalues(e) {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   }
-
+  async function createuser(newuserobj) {
+    setIsloading(true);
+    if (!navigator.onLine) {
+      toast.error("Oops, You are Offline!");
+      setIsloading(false);
+      return;
+    }
+    try {
+      let response = await fetch(
+        `${import.meta.env.VITE_API_BACKEND_BASE_URL}/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(newuserobj),
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
+      }
+      toast.success(data.message);
+      navigate("/login");
+    } catch (error) {
+      console.error(error.message);
+      toast.error(error.message);
+    } finally {
+      setIsloading(false);
+    }
+  }
+  async function formhandler(e) {
+    e.preventDefault();
+    await createuser(formdata);
+  }
   return (
-    <div className="mt-20 mobile:mt-24">
-      <h1 className="font-bold text-[36px]">Login to Exclusive</h1>
+    <div className="mt-10 mobile:mt-14">
+      <h1 className="font-bold text-[36px]">Create an Account</h1>
       <h2>Enter your details below</h2>
       <form
         onSubmit={formhandler}
-        className="flex flex-col text-[1.2rem] mobile:text-[1.2rem]"
+        className="flex flex-col text-[1.2rem] mt-6 mobile:text-[1.2rem]"
       >
+        <input
+          onChange={changeformvalues}
+          name="name"
+          value={formdata.name}
+          required
+          id="name"
+          className=" mb-7 text-[1rem] h-[50px] p-2 focus:outline-none  mobile:w-[400px] border-b-2 w-full"
+          type="text"
+          placeholder="Name"
+        ></input>
+
         <input
           onChange={changeformvalues}
           name="email"
           value={formdata.email}
           required
           id="email"
-          className="text-[1rem] h-[50px] p-2 focus:outline-none border-b-2 my-7 mobile:w-[400px]"
+          className="mb-7 text-[1rem] h-[50px] p-2 focus:outline-none mobile:w-[400px] border-b-2 w-full"
           type="email"
           placeholder="Email"
         ></input>
@@ -95,20 +102,19 @@ const Loginform = () => {
             id="password"
             required
             maxLength={15}
-            className="h-[50px] p-2 focus:outline-none w-full text-[1rem] mobile:w-[400px] border-b-2"
+            className="h-[50px] focus:outline-none p-2 text-[1rem] w-full mobile:w-[400px] border-b-2"
             type={passwordtype}
             placeholder="Password"
           ></input>
         </div>
         <button
           type="submit"
-          className="rounded flex items-center justify-center text-ourred-50 mt-10 bg-ourred-700 text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
+          className=" flex items-center justify-center text-ourred-50 mt-10 bg-ourred-700 rounded text-[1.2rem] sm:text-[1.5rem] pt-5 pb-5 max-h-9 min-h-9 hover:scale-[0.93] transition-transform duration-300"
         >
-          {isLoading ? <Spinner /> : "Login"}
+          {isloading ? <Spinner /> : "SignUp"}
         </button>
       </form>
     </div>
   );
 };
-
-export default Loginform;
+export default Signupform;

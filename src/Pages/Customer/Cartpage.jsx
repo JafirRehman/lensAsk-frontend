@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { toast } from "react-hot-toast";
 import CartItem from "../../Components/Cart/CartItem";
-import Spinner from "../../Components/Constants/Spinner";
+import Spinner from "../../Components/Spinner";
 const Cartpage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);

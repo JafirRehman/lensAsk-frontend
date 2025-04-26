@@ -1,4 +1,4 @@
-const Error = () => {
+const NotFound = () => {
   return (
     <div className="flex flex-col items-center  min-h-screen bg-gray-100">
       <div className="w-full mt-24 max-w-md text-center">
@@ -18,4 +18,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default NotFound;

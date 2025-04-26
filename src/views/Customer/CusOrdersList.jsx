@@ -1,8 +1,8 @@
 //done
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Spinner from "../../Components/Constants/Spinner";
-import Ordercomponent from "../../Components/Constants/Ordercomponent";
+import Spinner from "../../Components/Spinner";
+import Ordercomponent from "../../Components/Orders/Ordercomponent";
 const CusOrdersList = () => {
   const [isloading, setIsloading] = useState(false);
   const [orders, setOrders] = useState([]);

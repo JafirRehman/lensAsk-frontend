@@ -1,4 +1,4 @@
-import "../../styles/Footer.scss";
+import "@/styles/Footer.scss";
 import { FaMobileAlt, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

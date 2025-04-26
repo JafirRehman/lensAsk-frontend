@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import Loginform from "./Loginform";
-import Signupform from "./Signupform";
+import Loginform from "@/views/Auth/Loginform";
+import Signupform from "@/views/Auth/Signupform";
 
 const AuthTemplate = ({ formtype }) => {
   return (

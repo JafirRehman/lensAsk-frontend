@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Intro from "../../Components/User/Intro";
-import Spinner from "../../Components/Constants/Spinner";
+import Intro from "../../views/user/Intro";
+import Spinner from "../../Components/Spinner";
 import toast from "react-hot-toast";
 import { updateuser } from "../../redux/slices/user";
 

@@ -2,11 +2,11 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate, Link, matchPath } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
-import { userlogoutReducer } from "../../redux/slices/user";
+import { userlogoutReducer } from "@/redux/slices/user";
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
-import "../../styles/Header.scss";
+import useOnClickOutside from "@/utils/useOnClickOutside";
+import "@/styles/Header.scss";
 import toast from "react-hot-toast";
 
 const Header = () => {

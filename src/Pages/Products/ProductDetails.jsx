@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateuser } from "../../redux/slices/user";
 import toast from "react-hot-toast";
-import Spinner from "../../Components/Constants/Spinner";
+import Spinner from "../../Components/Spinner";
 
 const ProductDetails = () => {
   const [isLoading, setIsLoading] = useState(false);

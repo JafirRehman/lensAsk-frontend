@@ -1,7 +1,7 @@
 // Done
 import { useState } from "react";
 import toast from "react-hot-toast";
-import Spinner from "../../Components/Constants/Spinner";
+import Spinner from "../../Components/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const Createproductpage = () => {

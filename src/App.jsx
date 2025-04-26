@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./Components/Constants/Header.jsx";
-import Footer from "./Components/Constants/Footer.jsx";
-import ScrollToTop from "./Components/Constants/ScrollToTop.jsx";
-import Newsletter from "./Components/Constants/Newsletter.jsx";
+import Header from "@/Components/Header.jsx";
+import Footer from "@/Components/Footer.jsx";
+import ScrollToTop from "./utils/ScrollToTop.jsx";
+import Newsletter from "@/Components/Newsletter.jsx";
 import { Toaster } from "react-hot-toast";
 import allRoutes from "@/routes/index.jsx";
 import { useSelector } from "react-redux";

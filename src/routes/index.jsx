@@ -10,7 +10,7 @@ import Createproductpage from "@/Pages/Admin/Createproductpage.jsx";
 import ProductDetails from "@/Pages/Products/ProductDetails.jsx";
 import Transectionfail from "@/Pages/Stripe/Transectionfail.jsx";
 import Transectionsuccess from "@/Pages/Stripe/Transectionsuccess.jsx";
-import Error from "@/Pages/Error.jsx";
+import NotFound from "@/Pages/NotFound.jsx";
 
 import { AuthGuard, PublicGuard } from '@/middlewares/AuthGuard.jsx';
 import paths from "@/constants/path-names.json";
@@ -110,7 +110,7 @@ const allRoutes = (currentRole) => {
 
         {
             path: paths.notFound,
-            element: <Error />,
+            element: <NotFound />,
         }
     ]
 
